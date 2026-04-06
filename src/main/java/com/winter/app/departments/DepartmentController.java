@@ -1,6 +1,7 @@
 package com.winter.app.departments;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,7 +20,7 @@ public class DepartmentController {
 	@GetMapping("list")
 	public void list() throws Exception {
 		System.out.println("Controller List");
-		ArrayList<DepartmentDTO> ar = departmentService.list();
+		List<DepartmentDTO> ar = departmentService.list();
 		// for(초기식;조건식;증감식){}
 //		for(int i=0;i<ar.size();i++) {
 //			System.out.println(ar.get(i));
