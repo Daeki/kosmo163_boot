@@ -22,9 +22,10 @@
                     <h1 class="h3 mb-4 text-gray-800">학과 목록 Page</h1>
                     
                     <!-- 테이블 DIV 시작 -->
-                    <div>
-                    	<table>
-                    		<thead>
+                    <div class="row justify-content-center">
+                    <div class="col-6">
+                    	<table class="table">
+                    		<thead class="thead-dark">
                     			<tr>
                     				<th>학과명</th>
                     				<th>계열</th>
@@ -34,13 +35,29 @@
                     		<tbody>
 		                    	<c:forEach items="${list}" var="d">
 		                    		<tr>
-		                    			<td>${d.departmentName}</td>
+		                    			<td><a href="./detail?num=${d.departmentNo}">${d.departmentName}</a></td>
 		                    			<td>${d.category}</td>
-		                    			<td>${d.openYn}</td>
+		                    			<c:choose>
+		                    				<c:when test="${d.openYn eq 'Y'}">
+		                    				<td>OPEN</td>
+		                    				</c:when>
+		                    				<c:otherwise>
+		                    				<td>CLOSE</td>
+		                    				</c:otherwise>
+		                    			</c:choose>
+		                    			
+<%-- 		                    			<c:if test="${d.openYn ne 'Y'}">
+		                    			<td>OPEN</td>
+		                    			</c:if>
+		                    			<c:if test="${d.openYn eq 'N'}">
+		                    			<td>CLOSE</td>
+		                    			</c:if> --%>
+		                    			
 		                    		</tr>
 		                    	</c:forEach>
                     		</tbody>
                     	</table>
+                    </div>
                     </div>
                     <!-- 테이블 DIV 끝 -->
 

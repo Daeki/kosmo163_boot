@@ -28,9 +28,10 @@ public class DepartmentController {
 	}
 	
 	@GetMapping("detail")
-	public void detail(@RequestParam(name="num") String num) {
+	public String detail(@RequestParam(name="num") String num) {
 		DepartmentDTO departmentDTO = departmentService.detail(num);
-		System.out.println(departmentDTO);
+		
+		return "departments/detail";
 	}
 	
 	@GetMapping("create")
