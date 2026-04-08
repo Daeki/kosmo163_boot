@@ -11,23 +11,23 @@ public class DepartmentService {
 	@Autowired
 	private DepartmentDAO departmentDAO;
 	
-	public List<DepartmentDTO> list(){
+	public List<DepartmentDTO> list() throws Exception{
 		return departmentDAO.list();
 	}
 	
-	public DepartmentDTO detail(String num) {
-		return departmentDAO.detail(num);
+	public DepartmentDTO detail(DepartmentDTO departmentDTO) throws Exception{
+		return departmentDAO.detail(departmentDTO);
 	}
 	
-	public int create(DepartmentDTO departmentDTO) {
+	public int create(DepartmentDTO departmentDTO) throws Exception{
 		return departmentDAO.create(departmentDTO);
 	}
 	
-	public int delete(DepartmentDTO departmentDTO) {
+	public int delete(DepartmentDTO departmentDTO) throws Exception{
 		return departmentDAO.delete(departmentDTO);
 	}
 	
-	public int update(DepartmentDTO departmentDTO) {
+	public int update(DepartmentDTO departmentDTO) throws Exception{
 		return departmentDAO.update(departmentDTO);
 	}
 	

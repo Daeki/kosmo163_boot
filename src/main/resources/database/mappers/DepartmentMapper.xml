@@ -12,9 +12,9 @@
   		SELECT * FROM TB_DEPARTMENT
   	</select>
   	
-  	<select id="detail" parameterType="String" resultType="DepartmentDTO">
+  	<select id="detail" parameterType="DepartmentDTO" resultType="DepartmentDTO">
   		<!-- String, Primitive Type 은 DAO에 보낸 변수명을 #{변수명} 작성 -->
-  		SELECT * FROM TB_DEPARTMENT WHERE DEPARTMENT_NO = #{num}
+  		SELECT * FROM TB_DEPARTMENT WHERE DEPARTMENT_NO = #{departmentNo}
   	</select>
   	<!-- INSERT, UPDATE, DELETE는 resultType이 존재 X -->
   	<!-- 결과물은 숫자(int)로 리턴을 함  -->
