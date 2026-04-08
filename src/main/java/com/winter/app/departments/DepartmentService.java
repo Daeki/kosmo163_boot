@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 public class DepartmentService {
 	
 	@Autowired
-	private DepartmentDAO departmentDAO;
+	private DepartmentMapper departmentDAO;
 	
 	public List<DepartmentDTO> list() throws Exception{
 		return departmentDAO.list();

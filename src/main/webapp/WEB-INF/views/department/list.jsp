@@ -35,7 +35,7 @@
                     		<tbody>
 		                    	<c:forEach items="${list}" var="d">
 		                    		<tr>
-		                    			<td><a href="./detail?num=${d.departmentNo}">${d.departmentName}</a></td>
+		                    			<td><a href="./detail?departmentNo=${d.departmentNo}">${d.departmentName}</a></td>
 		                    			<td>${d.category}</td>
 		                    			<c:choose>
 		                    				<c:when test="${d.openYn eq 'Y'}">

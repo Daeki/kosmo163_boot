@@ -4,7 +4,7 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <!-- FQDN 사용할 DAO의 클래스명을 풀패키지명으로 작성 -->
-  <mapper namespace="com.winter.app.departments.DepartmentDAO">
+  <mapper namespace="com.winter.app.departments.DepartmentMapper">
   	<!-- 쿼리 태그 -->
   	<!-- ID : DAO에서 사용할 메서드명을 ID로 작성 -->
   	<!-- 컬럼명과 resultType의 Bean의 Setter이름이 같은걸 찾아서 대입 -->
