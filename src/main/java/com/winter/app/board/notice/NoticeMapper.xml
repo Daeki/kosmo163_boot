@@ -3,7 +3,16 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-  <mapper namespace="sample">
+  <mapper namespace="com.winter.app.board.notice.NoticeMapper">
+  	<!-- list -->
+  	<select id="list" resultType="NoticeDTO">
+  		SELECT * FROM TB_NOTICE
+  	</select>
 
+    <!-- create -->	
+    <insert id="create" parameterType="NoticeDTO">
+    	INSERT INTO TB_NOTICE 
+    	VALUES (BOARD_SEQ.NEXTVAL, #{boardTitle}, #{boardContents}, #{boardWriter}, sysdate, 0)
+    </insert>
     
   </mapper>
