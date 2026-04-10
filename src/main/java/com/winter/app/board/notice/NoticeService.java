@@ -7,26 +7,32 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.winter.app.page.Pager;
+
 @Service
 public class NoticeService {
 	
 	@Autowired
 	private NoticeMapper noticeMapper;
 	
-	public List<NoticeDTO> list(Long page)throws Exception{
+	public List<NoticeDTO> list(Pager pager)throws Exception{
 		Map<String, Long> map = new HashMap<>();
 		
-		Map<String, Long> p = this.make(page);
+		this.make(pager);
 		
 		
-		Long b = (page-1)*10+1;
-		Long e = page*10;
+		Long b = (pager.getPage()-1)*10+1;
+		Long e = pager.getPage()*10;
 		map.put("begin", b);
 		map.put("end", e);
+	
+		
+	
+		
 		return noticeMapper.list(map);
 	}
 	
-	private Map<String, Long> make(Long page) throws Exception {
+	private void make(Pager pager) throws Exception {
 		//1. 총 글의 갯수
 		Long totalCount = noticeMapper.getCount();
 		
@@ -44,8 +50,8 @@ public class NoticeService {
 		}
 		
 		//4. 현재 페이지 번호로 현재 블럭 번호 구하기
-		Long curBlock = page/perBlock;
-		if(page%perBlock != 0) {
+		Long curBlock = pager.getPage()/perBlock;
+		if(pager.getPage()%perBlock != 0) {
 			curBlock++;
 		}
 		
@@ -53,11 +59,9 @@ public class NoticeService {
 		Long start = (curBlock-1)*perBlock+1;
 		Long end = curBlock*perBlock;
 		
-		Map<String, Long> map = new HashMap<>();
-		map.put("start", start);
-		map.put("end", end);
+		pager.setStart(start);
+		pager.setEnd(end);
 		
-		return map;
 		
 	}
 	

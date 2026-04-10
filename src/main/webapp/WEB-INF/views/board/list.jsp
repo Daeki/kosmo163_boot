@@ -56,7 +56,7 @@
                     	</table>
                     	
                     	<div>
-                    		<c:forEach begin="1" end="13" var="i">
+                    		<c:forEach begin="${pager.start}" end="${pager.end}" var="i">
                     			<a href="./list?page=${i}">${i}</a>
                     		</c:forEach>
                     	</div>
