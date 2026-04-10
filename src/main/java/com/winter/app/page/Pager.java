@@ -42,7 +42,7 @@ public class Pager {
 	}
 	
 	public Long getPage() {
-		if(this.page==null) {
+		if(this.page==null || this.page<1) {
 			this.page=1L;
 		}
 		return this.page;
@@ -63,6 +63,10 @@ public class Pager {
 		Long totalPage = totalCount/this.getPerPage();
 		if(totalCount%this.perPage != 0) {
 			totalPage++;
+		}
+		
+		if(page>totalPage) {
+			this.page=totalPage;
 		}
 		
 		//3. 총 블럭 갯수
@@ -93,6 +97,8 @@ public class Pager {
 		}else {
 			this.setEnd(totalPage);
 		}
+		
+		this.makeRowNumber();
 
 		
 	}

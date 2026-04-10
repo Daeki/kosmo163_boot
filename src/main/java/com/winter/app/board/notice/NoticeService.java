@@ -19,7 +19,7 @@ public class NoticeService {
 		
 		pager.makePageNumber(noticeMapper.getCount());
 		
-		pager.makeRowNumber();
+		
 		
 		return noticeMapper.list(pager);
 	}
