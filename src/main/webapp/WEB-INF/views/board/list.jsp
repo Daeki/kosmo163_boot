@@ -56,6 +56,12 @@
                     	</table>
                     	
                     	<div>
+                    		<c:forEach begin="1" end="13" var="i">
+                    			<a href="./list?page=${i}">${i}</a>
+                    		</c:forEach>
+                    	</div>
+                    	
+                    	<div>
                     		<a href="./create">공지 등록</a>
                     	</div>
                     	

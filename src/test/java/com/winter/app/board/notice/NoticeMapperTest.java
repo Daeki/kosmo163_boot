@@ -13,35 +13,12 @@ class NoticeMapperTest {
 	@Autowired
 	private NoticeMapper noticeMapper;
 
-	@Test
-	void testList() throws Exception {
-		List<NoticeDTO> ar = noticeMapper.list();
-		assertNotEquals(0, ar.size());
-	}
 
 	@Test
-	void testCreate() throws Exception {
-		int idx=1;
-		for(int i=0;i<110;i++) {
-			NoticeDTO noticeDTO = new NoticeDTO();
-			noticeDTO.setBoardTitle("title"+i);
-			noticeDTO.setBoardContents("contents"+i);
-			noticeDTO.setBoardWriter("P00"+idx);
-			int result= noticeMapper.create(noticeDTO);
-			idx++;
-			if(idx>9) {
-				idx=1;
-			}
-			
-			if(i%10==0) {
-				
-				Thread.sleep(1000);
-			}
-			
-		}
-		
-		System.out.println("finish");
-		
+	void getCountTest()throws Exception{
+		Long result = noticeMapper.getCount();
+		assertNotEquals(0, result);
 	}
+
 
 }

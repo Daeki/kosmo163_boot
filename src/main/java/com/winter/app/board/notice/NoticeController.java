@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/notice/*")
@@ -20,8 +21,8 @@ public class NoticeController {
     
 	
 	@GetMapping("list")
-	public String list(Model model)throws Exception{
-		List<NoticeDTO> ar = noticeService.list();
+	public String list(@RequestParam(name ="page", defaultValue = "1") Long page, Model model)throws Exception{
+		List<NoticeDTO> ar = noticeService.list(page);
 		model.addAttribute("list", ar);
 		return "board/list";
 	}
