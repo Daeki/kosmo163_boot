@@ -31,13 +31,13 @@
 	                    		<div class="input-group mb-3">
 	                    		  <div class="input-group-prepend">
 									<select name="kind" class="custom-select">
-										<option value="v1">Title</option>
-										<option value="v2">Contents</option>
-										<option value="v3">Writer</option>
+										<option ${pager.kind eq 'v1'?'selected':''} value="v1">Title</option>
+										<option ${pager.kind eq 'v2'?'selected':''} value="v2">Contents</option>
+										<option ${pager.kind eq 'v3'?'selected':''} value="v3">Writer</option>
 									</select>
 								  </div>	
 	                    		
-								  <input type="text" name="search" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
+								  <input type="text" value="${pager.search}" name="search" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
 								  <div class="input-group-append">
 								    <button class="btn btn-outline-secondary" id="button-addon2">검색</button>
 								  </div>
