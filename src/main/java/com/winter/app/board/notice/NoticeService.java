@@ -45,7 +45,7 @@ public class NoticeService {
 	public int create(NoticeDTO noticeDTO, MultipartFile attach)throws Exception{
 		//1. 어디에 저장?
 		log.info(filePath);
-		filePath = filePath+"notice";
+		String filePath = this.filePath+"notice";
 		
 		//2. 어떤 이름으로 저장??
 		String fileName = UUID.randomUUID().toString();
