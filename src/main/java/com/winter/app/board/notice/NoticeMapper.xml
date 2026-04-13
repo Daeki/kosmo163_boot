@@ -4,25 +4,29 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="com.winter.app.board.notice.NoticeMapper">
+  	<sql id="search">
+  		WHERE BOARD_TITLE LIKE '%'||#{search}||'%'
+  	</sql>
+  
   	<select id="getCount" resultType="Long" parameterType="Pager">
   		SELECT COUNT(BOARD_NUM) FROM TB_NOTICE
-  		WHERE BOARD_TITLE LIKE '%'||#{search}||'%'
+  		<include refid="search"></include>
   	</select>
   
   	<!-- list -->
   	<select id="list" resultType="NoticeDTO" parameterType="Pager">
-  		<![CDATA[
+  		
 			SELECT * FROM
 				(
 					SELECT ROWNUM R, T.* FROM
 					(
 						SELECT * FROM TB_NOTICE
-						WHERE BOARD_TITLE LIKE '%'||#{search}||'%'
+						<include refid="search"></include>
 						ORDER BY BOARD_NUM DESC
 					) T
 				)
 			WHERE R BETWEEN #{first} AND #{last}
-		]]>
+		
   	</select>
 
     <!-- create -->	
