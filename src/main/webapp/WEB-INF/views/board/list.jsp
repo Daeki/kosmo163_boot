@@ -24,6 +24,19 @@
                     <!-- 테이블 DIV 시작 -->
                     <div class="row justify-content-center">
                     <div class="col-6">
+                    	<!-- 검색 폼 -->
+                    	<div>
+                    		<form action="./list" method="get">
+	                    		<div class="input-group mb-3">
+								  <input type="text" name="search" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
+								  <div class="input-group-append">
+								    <button class="btn btn-outline-secondary" id="button-addon2">검색</button>
+								  </div>
+								</div>
+							</form>
+                    		
+                    	</div>
+                    
                     	<table class="table">
                     		<thead class="thead-dark">
                     			<tr>
@@ -64,7 +77,7 @@
 						      </a>
 						    </li>
 						    	<c:forEach begin="${pager.start}" end="${pager.end}" var="i">
-                    			<li class="page-item"><a class="page-link" href="./list?page=${i}">${i}</a></li>
+                    			<li class="page-item"><a class="page-link" href="./list?page=${i}&search=${pager.search}">${i}</a></li>
                     			</c:forEach>
 						    
 						    <li class="page-item ${pager.next?'':'disabled'}">

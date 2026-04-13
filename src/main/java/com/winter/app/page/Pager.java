@@ -9,6 +9,8 @@ import lombok.ToString;
 @ToString
 public class Pager {
 	
+	private String search;
+	
 	//페이지 번호
 	private Long page;
 	
@@ -32,6 +34,13 @@ public class Pager {
 	
 	//다음 블럭 유무
 	private boolean next;
+	
+	public String getSearch() {
+		if(search == null) {
+			this.search="";
+		}
+		return this.search;
+	}
 	
 	public Long getPerPage() {
 		if(this.perPage == null || this.perPage%5 !=0) {
@@ -60,12 +69,14 @@ public class Pager {
 	public void makePageNumber(Long totalCount) throws Exception {
 		
 		//2. 총 페이지수 
-		Long totalPage = totalCount/this.getPerPage();
-		if(totalCount%this.perPage != 0) {
-			totalPage++;
-		}
+//		Long totalPage = totalCount/this.getPerPage();
+//		if(totalCount%this.perPage != 0) {
+//			totalPage++;
+//		}
 		
-		if(page>totalPage) {
+		Long totalPage = (long)(Math.ceil(totalCount/(double)this.getPerPage()));
+		
+		if(this.getPage()>totalPage) {
 			this.page=totalPage;
 		}
 		

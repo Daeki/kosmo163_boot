@@ -15,7 +15,9 @@
 				(
 					SELECT ROWNUM R, T.* FROM
 					(
-						SELECT * FROM TB_NOTICE ORDER BY BOARD_NUM DESC
+						SELECT * FROM TB_NOTICE
+						WHERE BOARD_TITLE LIKE '%'||#{search}||'%'
+						ORDER BY BOARD_NUM DESC
 					) T
 				)
 			WHERE R BETWEEN #{first} AND #{last}
