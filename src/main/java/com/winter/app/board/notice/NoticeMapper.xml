@@ -14,6 +14,11 @@
   		
   		LIKE '%'||#{search}||'%'
   	</sql>
+  	
+  	<select id="detail" parameterType="NoticeDTO" resultType="NoticeDTO">
+  		SELECT * FROM TB_NOTICE WHERE BOARD_NUM=#{boardNum}
+  	</select>
+  	
   
   	<select id="getCount" resultType="Long" parameterType="Pager">
   		SELECT COUNT(BOARD_NUM) FROM TB_NOTICE
