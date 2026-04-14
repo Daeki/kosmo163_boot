@@ -46,47 +46,59 @@ public class NoticeService {
 	
 	
 	
-	public int create(NoticeDTO noticeDTO, MultipartFile attach)throws Exception{
+	public int create(NoticeDTO noticeDTO, MultipartFile [] attach)throws Exception{
 		int result = noticeMapper.create(noticeDTO);
 		
 		//1. 어디에 저장?
 		log.info(filePath);
 		String filePath = this.filePath+this.notice;
 		
-		//2. 어떤 이름으로 저장??
-		String fileName = UUID.randomUUID().toString();
-//		log.warn(fileName);
-//		
-//		//3. 확장자 처리?
-//		log.error(attach.getOriginalFilename());
-//		String f = attach.getOriginalFilename();
-//		f = f.substring(f.lastIndexOf("."));
-//		log.info(f);
-		
-		fileName = fileName+"_"+attach.getOriginalFilename();
-		
-		//3. 저장
-		File file = new File(filePath);
-		
-		if(!file.exists()) {
-			file.mkdirs();
+		//attach 자체가 null인 경우
+		if(attach == null) {
+			return result;
 		}
 		
-		file = new File(file, fileName);
-		
-		//a. 파일 저장
-		attach.transferTo(file);
-		
-		//b. Spring에서 제공
-		//FileCopyUtils.copy(attach.getBytes(), file);
-		
-		//4. DB에 저장
-		NoticeFileDTO noticeFileDTO = new NoticeFileDTO();
-		noticeFileDTO.setFileName(fileName);
-		noticeFileDTO.setOriName(attach.getOriginalFilename());
-		noticeFileDTO.setBoardNum(noticeDTO.getBoardNum());
-		result = noticeMapper.createFile(noticeFileDTO);
-		
+		for(MultipartFile m:attach) {
+			
+			//파일이 없는 경우
+			if(m.isEmpty()) {
+				continue;
+			}
+			
+			//2. 어떤 이름으로 저장??
+			String fileName = UUID.randomUUID().toString();
+	//		log.warn(fileName);
+	//		
+	//		//3. 확장자 처리?
+	//		log.error(attach.getOriginalFilename());
+	//		String f = attach.getOriginalFilename();
+	//		f = f.substring(f.lastIndexOf("."));
+	//		log.info(f);
+			
+			fileName = fileName+"_"+m.getOriginalFilename();
+			
+			//3. 저장
+			File file = new File(filePath);
+			
+			if(!file.exists()) {
+				file.mkdirs();
+			}
+			
+			file = new File(file, fileName);
+			
+			//a. 파일 저장
+			m.transferTo(file);
+			
+			//b. Spring에서 제공
+			//FileCopyUtils.copy(attach.getBytes(), file);
+			
+			//4. DB에 저장
+			NoticeFileDTO noticeFileDTO = new NoticeFileDTO();
+			noticeFileDTO.setFileName(fileName);
+			noticeFileDTO.setOriName(m.getOriginalFilename());
+			noticeFileDTO.setBoardNum(noticeDTO.getBoardNum());
+			result = noticeMapper.createFile(noticeFileDTO);
+		}
 		return result;//noticeMapper.create(noticeDTO);
 	}
 
