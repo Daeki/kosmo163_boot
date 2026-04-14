@@ -10,6 +10,8 @@ import com.winter.app.page.Pager;
 @Mapper
 public interface NoticeMapper {
 	
+	public int createFile(NoticeFileDTO noticeFileDTO)throws Exception;
+	
 	public Long getCount(Pager pager)throws Exception;
 	
 	//list
