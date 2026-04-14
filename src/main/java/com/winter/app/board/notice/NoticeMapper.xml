@@ -24,9 +24,36 @@
   		LIKE '%'||#{search}||'%'
   	</sql>
   	
-  	<select id="detail" parameterType="NoticeDTO" resultType="NoticeDTO">
-  		SELECT * FROM TB_NOTICE WHERE BOARD_NUM=#{boardNum}
+  	<select id="detail" parameterType="NoticeDTO" resultMap="detailResult">
+  		SELECT *
+		FROM TB_NOTICE N
+			 LEFT JOIN 
+			 TB_NOTICEFILE NF
+			 USING(BOARD_NUM)
+		WHERE BOARD_NUM = #{boardNum}
   	</select>
+  	
+  	<resultMap type="NoticeDTO" id="detailResult">
+  		<!-- ID => Primary key -->
+  		<id column="BOARD_NUM" property="boardNum"/>
+  		<!-- 그외 나머지 -->
+  		<result column="BOARD_TITLE" property="boardTitle"/>
+  		<result column="BOARD_WRITER" property="boardWriter"/>
+  		<result column="BOARD_CONTENTS" property="boardContents"/>
+  		<result column="BOARD_DATE" property="boardDate"/>
+  		<result column="BOARD_HIT" property="boardHit"/>
+  
+  		
+  		<!-- 1:N -->
+  		<collection property="list" javaType="java.util.List" ofType="NoticeFileDTO">
+  			<id column="FILE_NUM" property="fileNum"/>
+  			<result column="FILE_NAME" property="fileName"/>
+  			<result column="ORI_NAME" property="oriName"/>
+  
+  		</collection>
+  		
+  	
+  	</resultMap>
   	
   
   	<select id="getCount" resultType="Long" parameterType="Pager">
