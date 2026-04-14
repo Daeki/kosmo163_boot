@@ -26,6 +26,13 @@
                     	<div>
                     		${dto.boardContents}
                     	</div>
+                    	
+                    	<div>
+							<c:forEach items="${dto.list}" var="f">
+								<h4><img src="/files/notice/${f.fileName}"> </h4>
+							</c:forEach>                    	
+                    	</div>
+                    	
                     </div>
                     
                     <div>
