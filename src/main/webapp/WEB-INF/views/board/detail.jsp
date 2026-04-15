@@ -36,6 +36,8 @@
                     </div>
                     
                     <div>
+                    	<a href="./reply?boardNum=${dto.boardNum}">답글</a>
+                    
                     	<a class="btn btn-outline-primary" href="./update?boardNum=${dto.boardNum}">학과수정</a>
                     	<form action="./delete" method="post">
                     		<input type="hidden" name="boardNum" value="${dto.boardNum}">
