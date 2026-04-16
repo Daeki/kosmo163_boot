@@ -19,7 +19,7 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">공지사항</h1>
+                    <h1 class="h3 mb-4 text-gray-800">${name}</h1>
                     
                     <!-- 테이블 DIV 시작 -->
                     <div class="row justify-content-center">
@@ -61,7 +61,10 @@
 		                    		<tr>
 		                    			<td>${d.boardNum}</td>
 		                    			<td><a href="./detail?boardNum=${d.boardNum}">
-		                    				
+		                    				<c:catch>
+		                    				<c:forEach begin="1" end="${d.boardDepth}">--</c:forEach> 
+		                    				</c:catch>
+		                    				${d.boardTitle}
 		                    				</a>
 		                    			</td>
 		                    			<td>${d.boardWriter}</td>

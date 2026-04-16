@@ -29,7 +29,7 @@
                     	
                     	<div>
 							<c:forEach items="${dto.list}" var="f">
-								<h4><img src="/files/notice/${f.fileName}"> </h4>
+								<h4><img src="/files/${name}/${f.fileName}"> </h4>
 							</c:forEach>                    	
                     	</div>
                     	

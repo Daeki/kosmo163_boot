@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.winter.app.board.BoardDTO;
+import com.winter.app.board.notice.NoticeDTO;
 import com.winter.app.page.Pager;
 
 @Controller
@@ -20,12 +21,25 @@ public class QnaController {
 	@Autowired
 	private QnaService qnaService;
 	
+	@ModelAttribute("name")
+	public String getName() {
+		return "qna";
+	}
+	
 	@GetMapping("list")
 	public String list(Pager pager, Model model)throws Exception{
 		List<BoardDTO> ar = qnaService.list(pager);
 		model.addAttribute("pager", pager);
 		model.addAttribute("list", ar);
+		
 		return "board/list";
+	}
+	
+	 @GetMapping("detail") 
+	 public String detail(QnaDTO qnaDTO, Model model)throws Exception{ 
+	  BoardDTO boardDTO = qnaService.detail(qnaDTO);
+	  model.addAttribute("dto", boardDTO); 
+	  return "board/detail"; 
 	}
 	
 	/*

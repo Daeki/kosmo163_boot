@@ -24,22 +24,28 @@ public class NoticeController {
 	@Autowired
 	private NoticeService noticeService;
 
-    
-	/*
-	 * @GetMapping("detail") public String detail(NoticeDTO noticeDTO, Model
-	 * model)throws Exception{ noticeDTO = noticeService.detail(noticeDTO);
-	 * model.addAttribute("dto", noticeDTO); return "board/detail"; }
-	 */
+	@ModelAttribute("name")
+	public String getName() {
+		return "notice";
+	}
 	
-	
+	 @GetMapping("detail") 
+	 public String detail(NoticeDTO noticeDTO, Model model)throws Exception{ 
+	  BoardDTO boardDTO = noticeService.detail(noticeDTO);
+	  model.addAttribute("dto", boardDTO); 
+	  return "board/detail"; 
+	}
+	 
+
 	@GetMapping("list")
-	public String list(Pager pager, Model model)throws Exception{
+	public String list(Pager pager, Model model) throws Exception {
 		List<BoardDTO> ar = noticeService.list(pager);
 		model.addAttribute("pager", pager);
 		model.addAttribute("list", ar);
+
 		return "board/list";
 	}
-	
+
 	/*
 	 * @GetMapping("create") public String create()throws Exception{ return
 	 * "board/create"; }
@@ -51,7 +57,5 @@ public class NoticeController {
 	 * int result = noticeService.create(noticeDTO, attach); return
 	 * "redirect:./list"; }
 	 */
-	
-	
 
 }

@@ -9,6 +9,7 @@ import com.winter.app.page.Pager;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,6 +19,12 @@ public class QnaService implements BoardService {
 	
 	@Autowired
 	private QnaMapper qnaMapper;
+	
+	@Value("${app.upload.base}")
+	private String filePath;
+	
+	@Value("${app.board.qna}")
+	private String qna;
 	
 	
 
@@ -53,7 +60,7 @@ public class QnaService implements BoardService {
 	@Override
 	public BoardDTO detail(BoardDTO boardDTO) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return qnaMapper.detail(boardDTO);
 	}
 
 
