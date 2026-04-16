@@ -1,6 +1,7 @@
 package com.winter.app.board.notice;
 
 import com.winter.app.Kosmo163BootApplication;
+import com.winter.app.board.BoardDTO;
 import com.winter.app.page.Pager;
 
 import java.util.List;
@@ -24,34 +25,32 @@ public class NoticeController {
 	private NoticeService noticeService;
 
     
-	@GetMapping("detail")
-	public String detail(NoticeDTO noticeDTO, Model model)throws Exception{
-		noticeDTO = noticeService.detail(noticeDTO);
-		model.addAttribute("dto", noticeDTO);
-		return "board/detail";
-	}
+	/*
+	 * @GetMapping("detail") public String detail(NoticeDTO noticeDTO, Model
+	 * model)throws Exception{ noticeDTO = noticeService.detail(noticeDTO);
+	 * model.addAttribute("dto", noticeDTO); return "board/detail"; }
+	 */
 	
 	
 	@GetMapping("list")
 	public String list(Pager pager, Model model)throws Exception{
-		List<NoticeDTO> ar = noticeService.list(pager);
+		List<BoardDTO> ar = noticeService.list(pager);
 		model.addAttribute("pager", pager);
 		model.addAttribute("list", ar);
 		return "board/list";
 	}
 	
-	@GetMapping("create")
-	public String create()throws Exception{
-		return "board/create";
-	}
-	
-	@PostMapping("create")
-	public String create(NoticeDTO noticeDTO,@RequestParam("attach") MultipartFile [] attach)throws Exception{
-		
-		
-		int result = noticeService.create(noticeDTO, attach);
-		return "redirect:./list";
-	}
+	/*
+	 * @GetMapping("create") public String create()throws Exception{ return
+	 * "board/create"; }
+	 * 
+	 * @PostMapping("create") public String create(NoticeDTO
+	 * noticeDTO,@RequestParam("attach") MultipartFile [] attach)throws Exception{
+	 * 
+	 * 
+	 * int result = noticeService.create(noticeDTO, attach); return
+	 * "redirect:./list"; }
+	 */
 	
 	
 

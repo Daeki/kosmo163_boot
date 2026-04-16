@@ -61,7 +61,7 @@
 		                    		<tr>
 		                    			<td>${d.boardNum}</td>
 		                    			<td><a href="./detail?boardNum=${d.boardNum}">
-		                    				<c:forEach begin="1" end="${d.boardDepth}">--</c:forEach> ${d.boardTitle}
+		                    				
 		                    				</a>
 		                    			</td>
 		                    			<td>${d.boardWriter}</td>

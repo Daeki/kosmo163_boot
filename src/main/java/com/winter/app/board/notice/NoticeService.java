@@ -12,13 +12,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.winter.app.board.BoardDTO;
+import com.winter.app.board.BoardService;
+import com.winter.app.files.FileDTO;
 import com.winter.app.page.Pager;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
-public class NoticeService {
+public class NoticeService implements BoardService {
 	
 	@Autowired
 	private NoticeMapper noticeMapper;
@@ -28,78 +31,50 @@ public class NoticeService {
 	
 	@Value("${app.board.notice}")
 	private String notice;
-	
-	
-	public NoticeDTO detail(NoticeDTO noticeDTO)throws Exception{
-		return noticeMapper.detail(noticeDTO);
+
+	@Override
+	public int createFile(FileDTO fileDTO) throws Exception {
+		// TODO Auto-generated method stub
+		return 0;
 	}
-	
-	public List<NoticeDTO> list(Pager pager)throws Exception{
-		
+
+	@Override
+	public Long getCount(Pager pager) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<BoardDTO> list(Pager pager) throws Exception {
 		pager.makePageNumber(noticeMapper.getCount(pager));
-		
-		
-		
 		return noticeMapper.list(pager);
 	}
-	
-	
-	
-	
-	public int create(NoticeDTO noticeDTO, MultipartFile [] attach)throws Exception{
-		int result = noticeMapper.create(noticeDTO);
-		
-		//1. 어디에 저장?
-		log.info(filePath);
-		String filePath = this.filePath+this.notice;
-		
-		//attach 자체가 null인 경우
-		if(attach == null) {
-			return result;
-		}
-		
-		for(MultipartFile m:attach) {
-			
-			//파일이 없는 경우
-			if(m.isEmpty()) {
-				continue;
-			}
-			
-			//2. 어떤 이름으로 저장??
-			String fileName = UUID.randomUUID().toString();
-	//		log.warn(fileName);
-	//		
-	//		//3. 확장자 처리?
-	//		log.error(attach.getOriginalFilename());
-	//		String f = attach.getOriginalFilename();
-	//		f = f.substring(f.lastIndexOf("."));
-	//		log.info(f);
-			
-			fileName = fileName+"_"+m.getOriginalFilename();
-			
-			//3. 저장
-			File file = new File(filePath);
-			
-			if(!file.exists()) {
-				file.mkdirs();
-			}
-			
-			file = new File(file, fileName);
-			
-			//a. 파일 저장
-			m.transferTo(file);
-			
-			//b. Spring에서 제공
-			//FileCopyUtils.copy(attach.getBytes(), file);
-			
-			//4. DB에 저장
-			NoticeFileDTO noticeFileDTO = new NoticeFileDTO();
-			noticeFileDTO.setFileName(fileName);
-			noticeFileDTO.setOriName(m.getOriginalFilename());
-			noticeFileDTO.setBoardNum(noticeDTO.getBoardNum());
-			result = noticeMapper.createFile(noticeFileDTO);
-		}
-		return result;//noticeMapper.create(noticeDTO);
+
+	@Override
+	public BoardDTO detail(BoardDTO boardDTO) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
+
+	@Override
+	public int create(BoardDTO boardDTO) throws Exception {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int update(BoardDTO boardDTO) throws Exception {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int delete(BoardDTO boardDTO) throws Exception {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	
+	
 
 }

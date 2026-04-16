@@ -1,5 +1,7 @@
 package com.winter.app.board.qna;
 
+import java.util.List;
+
 import com.winter.app.board.BoardDTO;
 
 import lombok.Getter;
@@ -14,6 +16,9 @@ public class QnaDTO extends BoardDTO{
 	private Long boardRef;
 	private Long boardStep;
 	private Long boardDepth;
+	
+	
+	private List<QnaFileDTO> list;
 	
 
 }
